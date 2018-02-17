@@ -25,7 +25,6 @@ class NIMA(nn.Module):
         return out
 
 
-
 def single_emd_loss(p, q, r=2):
     """
     Earth Mover's Distance of one sample

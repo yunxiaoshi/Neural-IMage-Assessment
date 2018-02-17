@@ -13,11 +13,11 @@ from torch.utils import data
 
 class AVADataset(data.Dataset):
     """AVA dataset
-    
-    Args: 
+
+    Args:
         csv_file: a 11-column csv_file, column one contains the names of image files, column 2-11 contains the empiricial distributions of ratings
         root_dir: directory to the images
-        transform: prepeocessing and augmentation of the training images
+        transform: preprocessing and augmentation of the training images
     """
 
     def __init__(self, csv_file, root_dir, transform=None):
