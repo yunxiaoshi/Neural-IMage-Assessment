@@ -18,10 +18,12 @@ This is a PyTorch implementation of the paper [Neural IMage Assessment](https://
 
 ## Example Results
 
-Here shows the predicted mean scores of some images from the AVA dataset. The ground truth is in the parenthesis.
++ Here shows the predicted mean scores of some images from the AVA dataset. The ground truth is in the parenthesis.
 
-![result1](http://7xrnzw.com1.z0.glb.clouddn.com/result.jpg)
-![result2](http://7xrnzw.com1.z0.glb.clouddn.com/result3.jpg)
+![result1](http://7xrnzw.com1.z0.glb.clouddn.com/result5.jpg)
+
++ The predicted aesthetic ratings from training on the AVA dataset is sensitive to contrast adjustments. See below(bottom right is the original input).
+![result2](http://7xrnzw.com1.z0.glb.clouddn.com/res.jpg)
 
 ## Requirements
 
