@@ -23,7 +23,7 @@ This is a PyTorch implementation of the paper [Neural IMage Assessment](https://
 ![result1](http://7xrnzw.com1.z0.glb.clouddn.com/result5.jpg)
 
 + The predicted aesthetic ratings from training on the AVA dataset is sensitive to contrast adjustments. See below(bottom right is the original input).
-![result2](http://7xrnzw.com1.z0.glb.clouddn.com/res.jpg)
+![result2](http://7xrnzw.com1.z0.glb.clouddn.com/result_comp.jpg)
 
 ## Requirements
 
