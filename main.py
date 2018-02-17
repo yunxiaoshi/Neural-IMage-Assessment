@@ -192,16 +192,21 @@ def main(config):
         test_loader = torch.utils.data.DataLoader(testset, batch_size=config.test_batch_size, shuffle=False, num_workers=config.num_workers)
 
         mean_preds = []
+        std_preds = []
         for data in test_loader:
             image = data['image']
             if torch.cuda.is_available():
                 image = image.cuda()
             output = model(image)
             output = output.view(10, 1)
-            predicted_mean = 0.0
+            predicted_mean, predicted_std = 0.0, 0.0
             for i, elem in enumerate(output, 1):
                 predicted_mean += i * elem
+            for j, elem in enumerate(output, 1):
+                predicted_std += elem * (i - predicted_mean) ** 2
             mean_preds.append(predicted_mean)
+            std_preds.append(predicted_std)
+        # Do what you want with predicted and std...
 
 
 if __name__ == '__main__':
