@@ -1,0 +1,5 @@
+https://github.com/pytorch/pytorch/
+torchvision
+numpy
+Pillow
+pandas
