@@ -10,9 +10,11 @@ This is a PyTorch implementation of the paper [Neural IMage Assessment](https://
 
 + The learning rate setting differs from the original paper. I can't seem to get the model to converge with momentum SGD using an lr of 3e-7 for the conv base and 3e-6 for the dense block. Other settings are all directly mirrored from the paper.
 
++ The code is written in Python 2, but should be portable to Python 3 without sweat.
+
 ## Usage
 
-+ Set ```--train=True``` and run ```python main.py``` to start training. The average training time for one epoch with batch_size=128 is roughly 1 hour on a Titan Xp GPU. For evaluation, set ```--test=True``` instead.
++ Set ```--train=True``` and run ```python main.py``` to start training. The average training time for one epoch with ```--batch_size=128``` is roughly 1 hour on a Titan Xp GPU. For evaluation, set ```--test=True``` instead.
 
 + I found [https://learning-rates.com/](https://learning-rates.com/) a very handy tool to monitor training in PyTorch in real time. You can check it out on how to use it. Remember do ```pip install lrs``` first if you are inclined to use it.
 
