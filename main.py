@@ -1,16 +1,11 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import argparse
 import os
 
 import numpy as np
 import matplotlib
-matplotlib.use('Agg')
+# matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 import torch
@@ -29,6 +24,8 @@ from model import *
 
 
 def main(config):
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     train_transform = transforms.Compose([
         transforms.Scale(256),
@@ -58,9 +55,9 @@ def main(config):
 
     if config.multi_gpu:
         model.features = torch.nn.DataParallel(model.features, device_ids=config.gpu_ids)
-        model = model.cuda()
+        model = model.to(device)
     else:
-        model = model.cuda()
+        model = model.to(device)
 
     conv_base_lr = config.conv_base_lr
     dense_lr = config.dense_lr
@@ -86,34 +83,31 @@ def main(config):
         param_num += int(np.prod(param.shape))
     print('Trainable params: %.2f million' % (param_num / 1e6))
 
-    if train:
+    if config.train:
         # for early stopping
         count = 0
         init_val_loss = float('inf')
         train_losses = []
         val_losses = []
-        for epoch in xrange(config.warm_start_epoch, config.epochs):
+        for epoch in range(config.warm_start_epoch, config.epochs):
             lrs.send('epoch', epoch)
             batch_losses = []
             for i, data in enumerate(train_loader):
-                images = autograd.Variable(data['image'])
-                labels = autograd.Variable(data['annotations']).float()
-                if torch.cuda.is_available():
-                    images = images.cuda()
-                    labels = labels.cuda()
+                images = data['image'].to(device)
+                labels = data['annotations'].to(device).float()
                 outputs = model(images)
                 outputs = outputs.view(-1, 10, 1)
 
                 optimizer.zero_grad()
 
                 loss = emd_loss(labels, outputs)
-                batch_losses.append(loss.data[0])
+                batch_losses.append(loss.item())
 
                 loss.backward()
 
                 optimizer.step()
 
-                lrs.send('train_emd_loss', loss.data[0])
+                lrs.send('train_emd_loss', loss.item())
 
                 print('Epoch: %d/%d | Step: %d/%d | Training EMD loss: %.4f' % (epoch + 1, config.epochs, i + 1, len(trainset) // config.train_batch_size + 1, loss.data[0]))
 
@@ -142,16 +136,13 @@ def main(config):
             # do validation after each epoch
             batch_val_losses = []
             for data in val_loader:
-                images = autograd.Variable(data['image'])
-                labels = autograd.Variable(data['annotations']).float()
-                if torch.cuda.is_available():
-                    images = images.cuda()
-                    labels = labels.cuda()
+                images = data['image'].to(device)
+                labels = data['annotations'].to(device).float()
                 with torch.no_grad():
                     outputs = model(images)
                 outputs = outputs.view(-1, 10, 1)
                 val_loss = emd_loss(labels, outputs)
-                batch_val_losses.append(val_loss.data[0])
+                batch_val_losses.append(val_loss.item())
             avg_val_loss = sum(batch_val_losses) / (len(valset) // config.val_batch_size + 1)
             val_losses.append(avg_val_loss)
 
@@ -185,7 +176,7 @@ def main(config):
             plt.legend()
             plt.savefig('./loss.png')
 
-    if test:
+    if config.test:
         # compute mean score
         test_transform = val_transform
         testset = AVADataset(csv_file=config.test_csv_file, root_dir=config.test_img_path, transform=val_transform)
@@ -194,9 +185,7 @@ def main(config):
         mean_preds = []
         std_preds = []
         for data in test_loader:
-            image = data['image']
-            if torch.cuda.is_available():
-                image = image.cuda()
+            image = data['image'].to(device)
             output = model(image)
             output = output.view(10, 1)
             predicted_mean, predicted_std = 0.0, 0.0

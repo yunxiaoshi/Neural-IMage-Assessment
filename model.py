@@ -1,12 +1,7 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
-from __future__ import absolute_import
-from __future__ import division
 
 import torch
 import torch.nn as nn
-
 
 class NIMA(nn.Module):
     """Neural IMage Assessment model by Google"""
@@ -37,7 +32,7 @@ def single_emd_loss(p, q, r=2):
     assert p.shape == q.shape, "Length of the two distribution must be the same"
     length = p.shape[0]
     emd_loss = 0.0
-    for i in xrange(1, length + 1):
+    for i in range(1, length + 1):
         emd_loss += sum(torch.abs(p[:i] - q[:i])) ** r
     return (emd_loss / length) ** (1. / r)
 
@@ -54,7 +49,7 @@ def emd_loss(p, q, r=2):
     assert p.shape == q.shape, "Shape of the two distribution batches must be the same."
     mini_batch_size = p.shape[0]
     loss_vector = []
-    for i in xrange(mini_batch_size):
+    for i in range(mini_batch_size):
         loss_vector.append(single_emd_loss(p[i], q[i], r=r))
     return sum(loss_vector) / mini_batch_size
 
