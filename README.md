@@ -1,6 +1,6 @@
 ## NIMA: Neural IMage Assessment
 
-This is a PyTorch implementation of the paper [Neural IMage Assessment](https://arxiv.org/abs/1709.05424) by Hossein Talebi and Peyman Milanfar. You can learn more from [this post at Google Research Blog](https://research.googleblog.com/2017/12/introducing-nima-neural-image-assessment.html).
+This is a PyTorch implementation of the paper [NIMA: Neural IMage Assessment](https://arxiv.org/abs/1709.05424) by Hossein Talebi and Peyman Milanfar. You can learn more from [this post at Google Research Blog](https://research.googleblog.com/2017/12/introducing-nima-neural-image-assessment.html).
 
 ## Implementation Details
 
@@ -10,7 +10,7 @@ This is a PyTorch implementation of the paper [Neural IMage Assessment](https://
 
 + The learning rate setting differs from the original paper. I can't seem to get the model to converge with momentum SGD using an lr of 3e-7 for the conv base and 3e-6 for the dense block. Other settings are all directly mirrored from the paper.
 
-+ The code is written in Python 2, but should be portable to Python 3 without sweat.
++ The code now only supports python3.
 
 ## Usage
 
@@ -29,7 +29,7 @@ This is a PyTorch implementation of the paper [Neural IMage Assessment](https://
 
 ## Requirements
 
-+ PyTorch master
++ PyTorch 0.4.0
 + torchvision
 + numpy
 + Pillow
