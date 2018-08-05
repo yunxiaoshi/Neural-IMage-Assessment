@@ -18,6 +18,9 @@ This is a PyTorch implementation of the paper [NIMA: Neural IMage Assessment](ht
 
 + I found [https://learning-rates.com/](https://learning-rates.com/) a very handy tool to monitor training in PyTorch in real time. You can check it out on how to use it. Remember do ```pip install lrs``` first if you are inclined to use it.
 
+## Pretrained model
+[Google Drive](https://drive.google.com/open?id=1S7_fAbukcAc8hQwJ1vyQau3Rlz7q6NHJ)
+
 ## Example Results
 
 + Here shows the predicted mean scores of some images from the AVA dataset. The ground truth is in the parenthesis.
