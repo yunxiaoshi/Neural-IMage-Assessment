@@ -177,6 +177,7 @@ def main(config):
             plt.savefig('./loss.png')
 
     if config.test:
+        model.eval()
         # compute mean score
         test_transform = val_transform
         testset = AVADataset(csv_file=config.test_csv_file, root_dir=config.test_img_path, transform=val_transform)
