@@ -38,14 +38,6 @@ def main(config):
         transforms.RandomCrop(224),
         transforms.ToTensor()])
 
-    trainset = AVADataset(csv_file=config.train_csv_file, root_dir=config.train_img_path, transform=train_transform)
-    valset = AVADataset(csv_file=config.val_csv_file, root_dir=config.val_img_path, transform=val_transform)
-
-    train_loader = torch.utils.data.DataLoader(trainset, batch_size=config.train_batch_size,
-        shuffle=True, num_workers=config.num_workers)
-    val_loader = torch.utils.data.DataLoader(valset, batch_size=config.val_batch_size,
-        shuffle=False, num_workers=config.num_workers)
-
     base_model = models.vgg16(pretrained=True)
     model = NIMA(base_model)
 
@@ -84,6 +76,13 @@ def main(config):
     print('Trainable params: %.2f million' % (param_num / 1e6))
 
     if config.train:
+        trainset = AVADataset(csv_file=config.train_csv_file, root_dir=config.train_img_path, transform=train_transform)
+        valset = AVADataset(csv_file=config.val_csv_file, root_dir=config.val_img_path, transform=val_transform)
+
+        train_loader = torch.utils.data.DataLoader(trainset, batch_size=config.train_batch_size,
+            shuffle=True, num_workers=config.num_workers)
+        val_loader = torch.utils.data.DataLoader(valset, batch_size=config.val_batch_size,
+            shuffle=False, num_workers=config.num_workers)
         # for early stopping
         count = 0
         init_val_loss = float('inf')
