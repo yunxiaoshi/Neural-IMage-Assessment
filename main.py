@@ -193,7 +193,7 @@ def main(config):
             for i, elem in enumerate(output, 1):
                 predicted_mean += i * elem
             for j, elem in enumerate(output, 1):
-                predicted_std += elem * (i - predicted_mean) ** 2
+                predicted_std += elem * (j - predicted_mean) ** 2
             mean_preds.append(predicted_mean)
             std_preds.append(predicted_std)
         # Do what you want with predicted and std...
