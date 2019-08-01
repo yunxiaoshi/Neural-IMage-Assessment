@@ -29,7 +29,7 @@ Training is done with early stopping monitoring. Here I set ```patience=5```.
 [Google Drive](https://drive.google.com/file/d/1zRU3HhQDyv6KEPK1zBJS0vAWbNo7xRxS/view?usp=sharing)
 
 ## Annotation CSV Files
-[train](https://drive.google.com/file/d/1w313GtuqEBp0qqavdKSYHst-AAbQSTmq/view?usp=sharing) [val](https://drive.google.com/file/d/1GsrkIdn7Jcg--2y3iuuDqvEpc_6oV36w/view?usp=sharing) [test](https://drive.google.com/file/d/17yvYHOc3CMq-04ZDri7BieXqwh2H633c/view?usp=sharing)
+[Train](https://drive.google.com/file/d/1w313GtuqEBp0qqavdKSYHst-AAbQSTmq/view?usp=sharing) [Validation](https://drive.google.com/file/d/1GsrkIdn7Jcg--2y3iuuDqvEpc_6oV36w/view?usp=sharing) [Test](https://drive.google.com/file/d/17yvYHOc3CMq-04ZDri7BieXqwh2H633c/view?usp=sharing)
 
 ## Example Results
 
@@ -38,6 +38,7 @@ Training is done with early stopping monitoring. Here I set ```patience=5```.
 ![good](https://i.ibb.co/NT5CSqh/good-min.png)
 
 + Also some failure cases...
+
 ![bad](https://i.ibb.co/rk5kYjc/bad-min.png)
 
 + The predicted aesthetic ratings from training on the AVA dataset are sensitive to contrast adjustments. See below (bottom right is the original input).
