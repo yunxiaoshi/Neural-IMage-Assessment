@@ -23,7 +23,7 @@ This is a PyTorch implementation of the paper [NIMA: Neural IMage Assessment](ht
 ## Training Statistics
 
 Training is done with early stopping monitoring. Here I set ```patience=5```.
-![loss](https://ibb.co/Zhw1Nhs)
+![loss](https://i.ibb.co/p3srn3D/loss.png)
 
 ## Pretrained Model
 [Google Drive](https://drive.google.com/file/d/1zRU3HhQDyv6KEPK1zBJS0vAWbNo7xRxS/view?usp=sharing)
