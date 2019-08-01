@@ -207,9 +207,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     # input parameters
-    parser.add_argument('--train_img_path', type=str, default='/home/mmvc/mmvc-ny-local/yunxiao/ava_data/train')
-    parser.add_argument('--val_img_path', type=str, default='/home/mmvc/mmvc-ny-local/yunxiao/ava_data/val')
-    parser.add_argument('--test_img_path', type=str, default='/home/mmvc/mmvc-ny-local/yunxiao/ava_data/test')
+    parser.add_argument('--train_img_path', type=str, default='/home/yunxiao/ava_data/train')
+    parser.add_argument('--val_img_path', type=str, default='/home/yunxiao/ava_data/val')
+    parser.add_argument('--test_img_path', type=str, default='/home/yunxiao/ava_data/test')
     parser.add_argument('--train_csv_file', type=str, default='../train_labels.csv')
     parser.add_argument('--val_csv_file', type=str, default='../val_labels.csv')
     parser.add_argument('--test_csv_file', type=str, default='../test_labels.csv')
