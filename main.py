@@ -5,7 +5,7 @@ import os
 
 import numpy as np
 import matplotlib
-# matplotlib.use('Agg')
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 import torch
@@ -16,7 +16,7 @@ import torchvision.transforms as transforms
 import torchvision.datasets as dsets
 import torchvision.models as models
 
-import lrs
+# import lera
 
 from data_loader import AVADataset
 
@@ -60,6 +60,7 @@ def main(config):
         )
 
     # send hyperparams
+    '''
     lrs.send({
         'title': 'EMD Loss',
         'train_batch_size': config.train_batch_size,
@@ -69,6 +70,7 @@ def main(config):
         'dense_lr': config.dense_lr,
         'momentum': 0.9
         })
+    '''
 
     param_num = 0
     for param in model.parameters():
@@ -89,7 +91,7 @@ def main(config):
         train_losses = []
         val_losses = []
         for epoch in range(config.warm_start_epoch, config.epochs):
-            lrs.send('epoch', epoch)
+            # lrs.send('epoch', epoch)
             batch_losses = []
             for i, data in enumerate(train_loader):
                 images = data['image'].to(device)
@@ -106,7 +108,7 @@ def main(config):
 
                 optimizer.step()
 
-                lrs.send('train_emd_loss', loss.item())
+                # lrs.send('train_emd_loss', loss.item())
 
                 print('Epoch: %d/%d | Step: %d/%d | Training EMD loss: %.4f' % (epoch + 1, config.epochs, i + 1, len(trainset) // config.train_batch_size + 1, loss.data[0]))
 
@@ -125,12 +127,12 @@ def main(config):
                 )
 
                 # send decay hyperparams
-                lrs.send({
-                    'lr_decay_rate': config.lr_decay_rate,
-                    'lr_decay_freq': config.lr_decay_freq,
-                    'conv_base_lr': config.conv_base_lr,
-                    'dense_lr': config.dense_lr
-                    })
+                # lrs.send({
+                #    'lr_decay_rate': config.lr_decay_rate,
+                #    'lr_decay_freq': config.lr_decay_freq,
+                #    'conv_base_lr': config.conv_base_lr,
+                #    'dense_lr': config.dense_lr
+                #    })
 
             # do validation after each epoch
             batch_val_losses = []
@@ -145,7 +147,7 @@ def main(config):
             avg_val_loss = sum(batch_val_losses) / (len(valset) // config.val_batch_size + 1)
             val_losses.append(avg_val_loss)
 
-            lrs.send('val_emd_loss', avg_val_loss)
+            # lrs.send('val_emd_loss', avg_val_loss)
 
             print('Epoch %d completed. Averaged EMD loss on val set: %.4f.' % (epoch + 1, avg_val_loss))
 
@@ -154,6 +156,8 @@ def main(config):
                 init_val_loss = avg_val_loss
                 # save model weights if val loss decreases
                 print('Saving model...')
+                if not os.path.exists(config.ckpt_path):
+                    os.makedirs(config.ckpt_path)
                 torch.save(model.state_dict(), os.path.join(config.ckpt_path, 'epoch-%d.pkl' % (epoch + 1)))
                 print('Done.\n')
                 # reset count
@@ -203,12 +207,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
     # input parameters
-    parser.add_argument('--train_img_path', type=str, default='/home/data/dataset/AVA/train')
-    parser.add_argument('--val_img_path', type=str, default='/home/data/dataset/AVA/val')
-    parser.add_argument('--test_img_path', type=str, default='/home/data/dataset/AVA/test')
-    parser.add_argument('--train_csv_file', type=str, default='./ann_train.csv')
-    parser.add_argument('--val_csv_file', type=str, default='./ann_val.csv')
-    parser.add_argument('--test_csv_file', type=str, default='./ann_test.csv')
+    parser.add_argument('--train_img_path', type=str, default='/home/mmvc/mmvc-ny-local/yunxiao/ava_data/train')
+    parser.add_argument('--val_img_path', type=str, default='/home/mmvc/mmvc-ny-local/yunxiao/ava_data/val')
+    parser.add_argument('--test_img_path', type=str, default='/home/mmvc/mmvc-ny-local/yunxiao/ava_data/test')
+    parser.add_argument('--train_csv_file', type=str, default='../train_labels.csv')
+    parser.add_argument('--val_csv_file', type=str, default='../val_labels.csv')
+    parser.add_argument('--test_csv_file', type=str, default='../test_labels.csv')
 
     # training parameters
     parser.add_argument('--train', type=bool, default=True)
@@ -224,7 +228,7 @@ if __name__ == '__main__':
     parser.add_argument('--epochs', type=int, default=100)
 
     # misc
-    parser.add_argument('--ckpt_path', type=str, default='./ckpts')
+    parser.add_argument('--ckpt_path', type=str, default='../ckpts')
     parser.add_argument('--multi_gpu', type=bool, default=False)
     parser.add_argument('--gpu_ids', type=list, default=None)
     parser.add_argument('--warm_start', type=bool, default=False)
