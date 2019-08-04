@@ -54,7 +54,8 @@ for i, img in enumerate(test_imgs):
     imt = test_transform(im)
     imt = imt.unsqueeze(dim=0)
     imt = imt.to(device)
-    out = model(imt)
+    with torch.no_grad():
+        out = model(imt)
     out = out.view(10, 1)
     for j, e in enumerate(out, 1):
         mean += j * e
