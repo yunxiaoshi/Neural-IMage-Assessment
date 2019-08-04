@@ -45,9 +45,9 @@ Training is done with early stopping monitoring. Here I set ```patience=5```.
 <img src="https://i.ibb.co/x5x18B8/horrible-min.png">
 </p>
 
-+ The predicted aesthetic ratings from training on the AVA dataset are sensitive to contrast adjustments. Below from left to right in a row-major order with progressively sharper contrast. Upper rightmost is the original input.
++ The predicted aesthetic ratings from training on the AVA dataset are sensitive to contrast adjustments. Below images from left to right in a row-major order are with progressively sharper contrast. Upper rightmost is the original input.
 <p align="center">
-<img src="https://i.ibb.co/h7jsXKN/compare-min.png">
+<img src="https://i.ibb.co/QvtrvBV/compare-min.png">
 </p>
 
 ## Requirements
