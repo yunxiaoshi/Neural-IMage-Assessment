@@ -35,14 +35,14 @@ Training is done with early stopping monitoring. Here I set ```patience=5```.
 
 + Here shows the predicted mean scores of some images from the validation set. The ground truth is in the parenthesis.
 
-![good](https://i.ibb.co/2FhrcMv/good.png)
+![good](https://i.ibb.co/8zqsss9/excellent-min.png)
 
 + Also some failure cases...
 
-![bad](https://i.ibb.co/5LT6dnJ/bad.png)
+![bad](https://i.ibb.co/x5x18B8/horrible-min.png)
 
-+ The predicted aesthetic ratings from training on the AVA dataset are sensitive to contrast adjustments. See below (bottom right is the original input).
-![result2](https://image.ibb.co/i3zxwz/result_comp.jpg)
++ The predicted aesthetic ratings from training on the AVA dataset are sensitive to contrast adjustments. Below from left to right in a row-major order with progressively sharper contrast. Upper rightmost is the original input.
+![result2](https://i.ibb.co/h7jsXKN/compare-min.png)
 
 ## Requirements
 
