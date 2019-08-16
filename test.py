@@ -63,7 +63,7 @@ for i, img in enumerate(test_imgs):
         std += (e * (k - mean) ** 2) ** (0.5)
     gt = test_df[test_df[0] == int(img.split('.')[0])].to_numpy()[:, 1:].reshape(10, 1)
     gt_mean = 0.0
-    for l, e in enumerate(gt):
+    for l, e in enumerate(gt, 1):
         gt_mean += l * e
     print(img.split('.')[0] + ' mean: %.3f | std: %.3f | GT: %.3f' % (mean, std, gt_mean))
     if args.vis:
