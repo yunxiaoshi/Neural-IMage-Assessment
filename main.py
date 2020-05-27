@@ -18,9 +18,9 @@ import torchvision.models as models
 
 from tensorboardX import SummaryWriter
 
-from data_loader import AVADataset
+from dataset.dataset import AVADataset
 
-from model import *
+from model.model import *
 
 
 def main(config):

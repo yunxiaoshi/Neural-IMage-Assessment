@@ -9,7 +9,8 @@ import torch
 import torchvision.models as models
 import torchvision.transforms as transforms
 
-from model import *
+from model.model import *
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--model', type=str, help='path to pretrained model')
