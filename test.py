@@ -1,3 +1,11 @@
+"""
+file - test.py
+Simple quick script to evaluate model on test images.
+
+Copyright (C) Yunxiao Shi 2017 - 2020
+NIMA is released under the MIT license. See LICENSE for the fill license text.
+"""
+
 import argparse
 import os
 import numpy as np
@@ -11,18 +19,13 @@ import torchvision.transforms as transforms
 
 from model.model import *
 
-
 parser = argparse.ArgumentParser()
 parser.add_argument('--model', type=str, help='path to pretrained model')
 parser.add_argument('--test_csv', type=str, help='test csv file')
 parser.add_argument('--test_images', type=str, help='path to folder containing images')
-parser.add_argument('--out', type=str, help='dest for images with predicted score')
 parser.add_argument('--workers', type=int, default=4, help='number of workers')
 parser.add_argument('--predictions', type=str, help='output file to store predictions')
 args = parser.parse_args()
-
-if not os.path.exists(args.out):
-    os.makedirs(args.out)
 
 base_model = models.vgg16(pretrained=True)
 model = NIMA(base_model)
@@ -78,6 +81,3 @@ for i, img in enumerate(test_imgs):
         f.write(str(img) + ' mean: %.3f | std: %.3f | GT: %.3f\n' % (mean, std, gt_mean))
     mean, std = 0.0, 0.0
     pbar.update()
-
-
-
