@@ -1,4 +1,10 @@
-# -*- coding: utf-8
+"""
+file - dataset.py
+Customized dataset class to loop through the AVA dataset and apply needed image augmentations for training.
+
+Copyright (C) Yunxiao Shi 2017 - 2020
+NIMA is released under the MIT license. See LICENSE for the fill license text.
+"""
 
 import os
 
