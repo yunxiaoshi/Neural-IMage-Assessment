@@ -1,5 +1,8 @@
 ## NIMA: Neural IMage Assessment
 
+![python 3.6+](https://img.shields.io/badge/python-3.6%2B-blue)]
+![MIT License](https://img.shields.io/badge/license-MIT-brightgreen)
+
 This is a PyTorch implementation of the paper [NIMA: Neural IMage Assessment](https://arxiv.org/abs/1709.05424) (accepted at [IEEE Transactions on Image Processing](https://ieeexplore.ieee.org/document/8352823)) by Hossein Talebi and Peyman Milanfar. You can learn more from [this post at Google Research Blog](https://research.googleblog.com/2017/12/introducing-nima-neural-image-assessment.html).
 
 ## Implementation Details
@@ -12,11 +15,16 @@ This is a PyTorch implementation of the paper [NIMA: Neural IMage Assessment](ht
 
 + The learning rate setting differs from the original paper. I can't seem to get the model to converge with momentum SGD using an lr of 3e-7 for the conv base and 3e-6 for the dense block. Also I didn't do much hyper-param tuning therefore you could probably get better results. Other settings are all directly mirrored from the paper.
 
-+ The code is tested with python3.6+.
-
 ## Requirements
 
-Either ```pip install -r requirements.txt``` to install the required dependencies or use [conda](https://docs.conda.io/en/latest/) to manage your env.
+It is recommeded to use [conda](https://docs.conda.io/en/latest/) to manage your env. For example do 
+
+```
+conda create -n nima python=3.6
+conda activate nima
+pip install -r requirements.txt
+```  
+to install the dependancies.
 
 ## Usage
 
@@ -35,7 +43,7 @@ python test.py --model /path/to/your_model --test_csv /path/to/test_labels.csv -
 
 ## Training Statistics
 
-Training is done with early stopping monitoring. Here I set ```patience=10```.
+Training is done with early stopping monitoring. Here I set ```early_stopping_patience=10```.
 <p align="center">
 <img src="./snapshots/snapshot@0525.png">
 </p>
@@ -48,19 +56,20 @@ Training is done with early stopping monitoring. Here I set ```patience=10```.
 
 ## Example Results
 
-+ Here shows the predicted mean scores of some images from the validation set. The ground truth is in the parenthesis.
++ Here shows the predicted mean scores of some images from the validation set. Each image title starts with ground-truth rating followed by the predicted mean and std in the parentheses.
 
 <p align="center">
-<img src="https://i.ibb.co/8zqsss9/excellent-min.png">
+<img src="./snapshots/snapgood@0828.png">
 </p>
 
 + Also some failure cases...
 
 <p align="center">
-<img src="https://i.ibb.co/x5x18B8/horrible-min.png">
+<img src="./snapshots/snapbad@0828.png">
 </p>
 
-+ The predicted aesthetic ratings from training on the AVA dataset are sensitive to contrast adjustments. Below images from left to right in a row-major order are with progressively sharper contrast. Upper rightmost is the original input.
++ The predicted aesthetic ratings from training on the AVA dataset are sensitive to contrast adjustments. Below images from left to right in a row-major order are with progressively sharper contrast, with lower leftmost being the original input. Contrast adjustment is done using ```ImageEnhance``` from ```PIL```. 
+
 <p align="center">
-<img src="https://i.ibb.co/QvtrvBV/compare-min.png">
+<img src="./snapshots/enhance@0829.png">
 </p>
