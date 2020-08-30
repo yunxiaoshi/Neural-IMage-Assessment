@@ -1,4 +1,10 @@
-# -*- coding: utf-8 -*-
+"""
+file - main.py
+Main script to train the aesthetic model on the AVA dataset.
+
+Copyright (C) Yunxiao Shi 2017 - 2020
+NIMA is released under the MIT license. See LICENSE for the fill license text.
+"""
 
 import argparse
 import os
