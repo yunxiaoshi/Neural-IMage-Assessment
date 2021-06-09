@@ -2,7 +2,7 @@
 file - test.py
 Simple quick script to evaluate model on test images.
 
-Copyright (C) Yunxiao Shi 2017 - 2020
+Copyright (C) Yunxiao Shi 2017 - 2021
 NIMA is released under the MIT license. See LICENSE for the fill license text.
 """
 
@@ -48,7 +48,9 @@ model.eval()
 test_transform = transforms.Compose([
     transforms.Scale(256), 
     transforms.RandomCrop(224), 
-    transforms.ToTensor()
+    transforms.ToTensor(), 
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], 
+                         std=[0.229, 0.224, 0.225])
     ])
 
 test_df = pd.read_csv(args.test_csv, header=None)
