@@ -2,7 +2,7 @@
 file - main.py
 Main script to train the aesthetic model on the AVA dataset.
 
-Copyright (C) Yunxiao Shi 2017 - 2020
+Copyright (C) Yunxiao Shi 2017 - 2021
 NIMA is released under the MIT license. See LICENSE for the fill license text.
 """
 
@@ -22,7 +22,7 @@ import torchvision.transforms as transforms
 import torchvision.datasets as dsets
 import torchvision.models as models
 
-from tensorboardX import SummaryWriter
+from torch.utils.tensorboard import SummaryWriter
 
 from dataset.dataset import AVADataset
 
@@ -38,12 +38,16 @@ def main(config):
         transforms.Scale(256),
         transforms.RandomCrop(224),
         transforms.RandomHorizontalFlip(),
-        transforms.ToTensor()])
+        transforms.ToTensor(), 
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], 
+            std=[0.229, 0.224, 0.225])])
 
     val_transform = transforms.Compose([
         transforms.Scale(256),
         transforms.RandomCrop(224),
-        transforms.ToTensor()])
+        transforms.ToTensor(), 
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], 
+            std=[0.229, 0.224, 0.225])])
 
     base_model = models.vgg16(pretrained=True)
     model = NIMA(base_model)
@@ -216,9 +220,9 @@ if __name__ == '__main__':
 
     # misc
     parser.add_argument('--ckpt_path', type=str, default='./ckpts')
-    parser.add_argument('--multi_gpu', type=bool, default=False)
+    parser.add_argument('--multi_gpu', action='store_true')
     parser.add_argument('--gpu_ids', type=list, default=None)
-    parser.add_argument('--warm_start', type=bool, default=False)
+    parser.add_argument('--warm_start', action='store_true')
     parser.add_argument('--warm_start_epoch', type=int, default=0)
     parser.add_argument('--early_stopping_patience', type=int, default=10)
     parser.add_argument('--save_fig', action='store_true')
