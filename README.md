@@ -1,7 +1,7 @@
 ## NIMA: Neural IMage Assessment
 
-[![Python 3.6+](https://img.shields.io/badge/python-3.6%2B-blue)](https://www.python.org/)
-[![MIT License](https://img.shields.io/badge/license-MIT-brightgreen)](./LICENSE)
+[![Python 3.6+](https://img.shields.io/badge/Python-3.6%2B-blue)](https://www.python.org/)
+[![MIT License](https://img.shields.io/badge/MIT-License-brightgreen)](./LICENSE)
 
 This is a PyTorch implementation of the paper [NIMA: Neural IMage Assessment](https://arxiv.org/abs/1709.05424) (accepted at [IEEE Transactions on Image Processing](https://ieeexplore.ieee.org/document/8352823)) by Hossein Talebi and Peyman Milanfar. You can learn more from [this post at Google Research Blog](https://research.googleblog.com/2017/12/introducing-nima-neural-image-assessment.html).
 
@@ -35,7 +35,7 @@ python main.py --img_path /path/to/images/ --train --train_csv_file /path/to/tra
 For inference, do
 
 ```python
-python test.py --model /path/to/your_model --test_csv /path/to/test_labels.csv --test_images /path/to/images --predictions /path/to/save/predictions
+python -W ignore test.py --model /path/to/your_model --test_csv /path/to/test_labels.csv --test_images /path/to/images --predictions /path/to/save/predictions
 ```
 
 See ```predictions/``` for dumped predictions as an example.
