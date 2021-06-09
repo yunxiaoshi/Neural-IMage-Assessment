@@ -2,7 +2,7 @@
 file - dataset.py
 Customized dataset class to loop through the AVA dataset and apply needed image augmentations for training.
 
-Copyright (C) Yunxiao Shi 2017 - 2020
+Copyright (C) Yunxiao Shi 2017 - 2021
 NIMA is released under the MIT license. See LICENSE for the fill license text.
 """
 
@@ -55,8 +55,8 @@ if __name__ == '__main__':
         transforms.Scale(256), 
         transforms.RandomCrop(224), 
         transforms.RandomHorizontalFlip(), 
-        transforms.ToTensor()
-    ])
+        transforms.ToTensor(), 
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
     dset = AVADataset(csv_file=csv_file, root_dir=root, transform=train_transform)
     train_loader = data.DataLoader(dset, batch_size=4, shuffle=True, num_workers=4)
     for i, data in enumerate(train_loader):

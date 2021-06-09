@@ -2,7 +2,7 @@
 file - model.py
 Implements the aesthemic model and emd loss used in paper.
 
-Copyright (C) Yunxiao Shi 2017 - 2020
+Copyright (C) Yunxiao Shi 2017 - 2021
 NIMA is released under the MIT license. See LICENSE for the fill license text.
 """
 
